@@ -1,0 +1,21 @@
+require 'selenium-webdriver'
+require 'rspec/expectations'
+
+@browser=Selenium::WebDriver.for :chrome
+@browser.navigate.to "https://www.capitalone.com/"
+puts @browser.title
+
+# Credit_cards=@browser.find_element(:class=>'supersubssfHover')
+
+credit_cards=@browser.find_element(:id=>'nav-primary-cc')
+puts credit_cards.text
+cc=@browser.action.move_to(credit_cards)
+cc.perform
+
+@browser.find_element(:link_text=>'Browse All Cards').click
+ Selenium::WebDriver::Wait.new(timeout: 5).until do
+   @browser.find_element(:link_text => 'Browse All Cards').displayed?
+ end
+
+
+

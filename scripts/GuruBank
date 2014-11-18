@@ -1,0 +1,38 @@
+require 'selenium-webdriver'
+require 'rspec/expectations'
+require 'watir-webdriver'
+#
+#
+# def alert_present?
+#   begin
+#     @alert= @browser.switch_to.alert
+#     puts "Alert present!"
+#     return true
+#   rescue
+#     puts "No alert present."
+#     return false
+#   end
+# end
+
+
+@browser = Selenium::WebDriver.for :chrome
+@browser.navigate.to 'http://demo.guru99.com/V4'
+
+@browser.find_element(:name => 'uid').send_keys('mngr5630')
+@browser.find_element(:name => 'password').send_keys('UgYmevy')
+@browser.find_element(:name => 'btnLogin').click
+#display_text=@browser.find_element(:xpath=>'//marquee')
+display_text=@browser.find_element(:css=>'marquee')
+puts display_text.text
+#managerid_text=@browser.find_element(:css=>'body > table > tbody > tr > td > table > tbody > tr.heading3 > td')
+managerid_text=@browser.find_element(:xpath=>'//tr[3]/td')
+puts managerid_text.text
+#expect @browser.find_element(:xpath=>'//tr[3]/td').text eq (managerid_text.text)
+@browser.screenshot.save 'abc.png'
+
+# if (alert_present?)
+#   @alert.accept
+#   puts "continue with execution"
+# end
+#
+# @browser.quit
